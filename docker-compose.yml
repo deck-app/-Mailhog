@@ -1,12 +1,14 @@
 version: "3"
 services:
   mailhog:
-    image: "mailhog/mailhog:v1.0.0"
+    build: 
+      context: './mailhog'
     ports:
       - "1025:1025"
       - "${MAILHOG_PORT}:8025"
   apache_with_php:
-    image: "nabad600/apphp:7.0"
+    build:
+      context: './apache'
     volumes:
       - "${APP_CODE_PATH_HOST}:/var/www/html"
     ports:
