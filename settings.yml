@@ -50,9 +50,9 @@ user:
   #     DOCUMENT_ROOT
 
 #System defaults
-system:
-  show_localpath_selector:
-    true
+# system:
+#   show_localpath_selector:
+#     true
   #For collecting and storing DB in .env
   #db/user/password
   # db_credentials:
@@ -61,5 +61,3 @@ system:
   ports:
     http:
       MAILHOG_PORT
-    others:
-      - NGINX_HOST_HTTP_PORT
