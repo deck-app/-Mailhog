@@ -22,7 +22,7 @@ jobs:
           sleep 10s
         done
     - name: Curl Test
-       run: curl -i http://localhost:40687/
+      run: curl -i http://localhost:40687/
     - name: Destroy container and file
       run:  |
         docker-compose down
