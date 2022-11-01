@@ -26,7 +26,6 @@ jobs:
     - name: Destroy container and file
       run:  |
         docker-compose down
-        docker stop $(docker ps -a -q)
         echo "y" | docker system prune -a
   Mailhog-ARM64:
     runs-on: self-hosted
@@ -45,5 +44,4 @@ jobs:
     - name: Destroy container and file
       run:  |
         docker-compose down
-        docker stop $(docker ps -a -q)
         echo "y" | docker system prune -a
