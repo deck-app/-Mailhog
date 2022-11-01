@@ -1,7 +1,7 @@
 ARG GOTAG=1.18-alpine
 FROM golang:${GOTAG} as builder
 ARG MAILHOG_VERSION=latest
-MAINTAINER CD2Team <codesign2@icloud.com>
+LABEL maintainer CD2Team <codesign2@icloud.com>
 
 RUN set -x \
   && buildDeps='git musl-dev gcc' \
