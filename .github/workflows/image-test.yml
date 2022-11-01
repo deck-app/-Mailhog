@@ -16,7 +16,11 @@ jobs:
     - name: Build the Docker image mailhog
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Image Test 
-      run: curl -i http://localhost:40687/
+      run:  |
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:40687/)" != "200" ]]; 
+        do 
+          sleep 10s
+        done
   Mailhog-ARM64:
     runs-on: self-hosted
     steps:
@@ -24,4 +28,8 @@ jobs:
     - name: Build the Docker image mailhog
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Image Test 
-      run: curl -i http://localhost:40687/
+      run:  |
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:40687/)" != "200" ]]; 
+        do 
+          sleep 10s
+        done
