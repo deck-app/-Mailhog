@@ -1,4 +1,4 @@
-name: Laravel 
+name: Mailhog 
 
 on:
   schedule:
@@ -28,7 +28,7 @@ jobs:
         docker-compose down
         echo "y" | docker system prune -a
   Mailhog-ARM64:
-    runs-on: self-hosted
+    runs-on: buildjet-4vcpu-ubuntu-2204-arm
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image mailhog
