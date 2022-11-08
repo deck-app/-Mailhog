@@ -28,9 +28,9 @@ jobs:
         docker-compose down
         echo "y" | docker system prune -a
   Mailhog-ARM64:
-    runs-on: self-hosted
+    runs-on: ubuntu_latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: uraimo/run-on-arch-action@v2.3.0
     - name: Build the Docker image mailhog
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Image Test 
