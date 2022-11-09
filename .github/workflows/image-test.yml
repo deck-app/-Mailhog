@@ -28,10 +28,16 @@ jobs:
         docker-compose down
         echo "y" | docker system prune -a
   Mailhog-ARM64:
-    runs-on: raspios_lite_arm64:latest
+    runs-on: ubuntu-20.04
+    name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
+    strategy:
+      matrix:
+        include:
+          - arch: aarch64
+            distro: ubuntu20.04
     steps:
-    - uses: actions/checkout@v2
-    - uses: pguyot/arm-runner-action@v2
+    - uses: actions/checkout@v2.1.0
+    - uses: uraimo/run-on-arch-action@v2
     - name: Build the Docker image mailhog
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Image Test 
