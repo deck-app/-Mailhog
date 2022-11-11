@@ -30,8 +30,7 @@ jobs:
   Mailhog-ARM64:
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v2.1.0
-    - uses: uraimo/run-on-arch-action@v2
+    - uses: actions/checkout@v2
     - name: Build the Docker image mailhog
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Image Test 
