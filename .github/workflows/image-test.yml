@@ -2,7 +2,7 @@ name: Mailhog
 
 on:
   schedule:
-  - cron:  '30 1 * * *'
+  - cron:  '31 20 * * *'
   push:
     branches: [ master ]
   pull_request:
