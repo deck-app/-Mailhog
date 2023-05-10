@@ -40,7 +40,7 @@ jobs:
         SLACK_MESSAGE: 'Mailhog ${{ matrix.os }} :rocket:'
         SLACK_TITLE: Post Title
         SLACK_USERNAME: Devops Bot
-        # SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         SITE_NAME: Mailhog
         SITE_URL: https://github.com/deck-app/mailhog
         SHOW_ACTIONS_URL: true
