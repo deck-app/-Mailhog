@@ -2,15 +2,20 @@ name: Mailhog
 
 on:
   schedule:
-  - cron:  '31 20 * * *'
+  - cron:  '30 19 * * *'
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
-  Mailhog-AMD64:
-    runs-on: ubuntu-latest
+  Mailhog:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.os }}
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image mailhog
@@ -27,21 +32,28 @@ jobs:
       run:  |
         docker-compose down
         echo "y" | docker system prune -a
-  Mailhog-ARM64:
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image mailhog
-      run: docker-compose -f "docker-compose.yml" up -d --build
-    - name: Image Test 
-      run:  |
-        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:40687/)" != "200" ]]; 
-        do 
-          sleep 10s
-        done
-    - name: Curl Test
-      run: curl -i http://localhost:40687/
-    - name: Destroy container and file
-      run:  |
-        docker-compose down
-        echo "y" | docker system prune -a
+    - name: Slack Notification
+      uses: 8398a7/action-slack@v3
+      with: 
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        channel: '#github_action_status'
+      if: always()
+  # Mailhog-ARM64:
+  #   runs-on: self-hosted
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Build the Docker image mailhog
+  #     run: docker-compose -f "docker-compose.yml" up -d --build
+  #   - name: Image Test 
+  #     run:  |
+  #       while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:40687/)" != "200" ]]; 
+  #       do 
+  #         sleep 10s
+  #       done
+  #   - name: Curl Test
+  #     run: curl -i http://localhost:40687/
+  #   - name: Destroy container and file
+  #     run:  |
+  #       docker-compose down
+  #       echo "y" | docker system prune -a
