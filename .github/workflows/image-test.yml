@@ -33,11 +33,23 @@ jobs:
         docker-compose down
         echo "y" | docker system prune -a
     - name: Slack Notification
-      uses: 8398a7/action-slack@v3
-      with: 
-        status: ${{ job.status }}
-        fields: repo,message,commit,author,action,eventName,ref,workflow
-        channel: '#github_action_status'
+      uses: partnerhero/action-webhook-slack-notify@v2.1.0
+      env:
+        SLACK_CHANNEL: github_action_status
+        SLACK_COLOR: '#3278BD'
+        SLACK_MESSAGE: 'Mailhog ${{ matrix.os }} :rocket:'
+        SLACK_TITLE: Post Title
+        SLACK_USERNAME: Devops Bot
+        # SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SITE_NAME: Mailhog
+        SITE_URL: https://github.com/deck-app/mailhog
+        SHOW_ACTIONS_URL: true
+        SHOW_REF: true
+        SHOW_EVENT: true
+      # with: 
+      #   status: ${{ job.status }}
+      #   fields: repo,message,commit,author,action,eventName,ref,workflow
+      #   channel: '#github_action_status'
       if: always()
   # Mailhog-ARM64:
   #   runs-on: self-hosted
