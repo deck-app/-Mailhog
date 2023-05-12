@@ -33,10 +33,10 @@ jobs:
         docker-compose down
         echo "y" | docker system prune -a
     - name: Slack Notification
-      uses: 8398a7/action-slack@v3
+      uses: act10ns/slack@v1
       with: 
         status: ${{ job.status }}
-        fields: repo,message,commit,author,action,eventName,ref,workflow
+        steps: ${{ toJson(steps) }}
         channel: '#github_action_status'
       if: always()
   # Mailhog-ARM64:
