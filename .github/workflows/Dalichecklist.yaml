@@ -33,7 +33,7 @@ jobs:
         SLACK_CHANNEL: github_action_status
         SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
         SLACK_ICON: https://github.com/rtCamp.png?size=48
-        SLACK_MESSAGE: 'Post Content MySQL 5.7 AMD64 :rocket:'
+        SLACK_MESSAGE: 'Post Content Mailhog AMD64 :rocket:'
         SLACK_TITLE: Post Title
         SLACK_USERNAME: rtCamp
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -76,7 +76,7 @@ jobs:
         SLACK_CHANNEL: github_action_status
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://github.com/rtCamp.png?size=48
-        SLACK_MESSAGE: 'Post Content MySQL 5.7 ARM64 :rocket:'
+        SLACK_MESSAGE: 'Post Content Mailhog ARM64 :rocket:'
         SLACK_TITLE: Post Title
         SLACK_USERNAME: rtCamp
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
